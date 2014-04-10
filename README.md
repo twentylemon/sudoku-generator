@@ -16,7 +16,7 @@ arguments:
     -s  Specifiy the size of the sudoku boards to create.
         p: width of the box regions
         q: height of the box regions
-        By default, 9x9 boards (p=q=3) boards are created.
+        By default, 9x9 (p=q=3) boards are created.
         
     -g  Specifiy which type of generator to use.
         t: use a top down generator

@@ -109,7 +109,7 @@ public class ArgsParser {
                 + "\t-s\tSpecifiy the size of the sudoku boards to create.\n"
                 + "\t\tp: width of the box regions\n"
                 + "\t\tq: height of the box regions\n"
-                + "\t\tBy default, 9x9 boards (p=q=3) boards are created.\n\n"
+                + "\t\tBy default, 9x9 (p=q=3) boards are created.\n\n"
                 + "\t-g\tSpecifiy which type of generator to use.\n"
                 + "\t\tt: use a top down generator\n"
                 + "\t\tb: use a bottom up generator\n\n"
