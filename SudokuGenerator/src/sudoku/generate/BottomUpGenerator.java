@@ -5,6 +5,7 @@ import java.util.Random;
 import sudoku.SolverService;
 import sudoku.SudokuBoard;
 import sudoku.SudokuSolver;
+import sudoku.util.ArrayUtil;
 
 /**
  * Generates sudoku problems from the bottom up. At each iteration, a cell
@@ -19,6 +20,7 @@ import sudoku.SudokuSolver;
 public class BottomUpGenerator implements SudokuGenerator {
 
     private final SudokuBoard brd;
+    private final int[] cells;
     private final Random rand = new Random();
 
     /**
@@ -30,6 +32,7 @@ public class BottomUpGenerator implements SudokuGenerator {
      */
     public BottomUpGenerator(int p, int q){
         this.brd = new SudokuBoard(p, q);
+        cells = ArrayUtil.range(0, brd.getNumCells());
     }
 
     /**
@@ -51,12 +54,15 @@ public class BottomUpGenerator implements SudokuGenerator {
     @Override
     public SudokuBoard getProblem(){
         SudokuBoard board = new SudokuBoard(brd);
+        ArrayUtil.shuffle(cells);
+        int pos = 0;
 
         while (true){
             int cell;
             List<Integer> options = null;
             do {
-                cell = rand.nextInt(board.getNumCells());
+                cell = cells[pos];
+                pos = (pos + 1) % cells.length;
                 if (!board.isSet(cell)){
                     options = board.getOptionsList(cell);
                 }
