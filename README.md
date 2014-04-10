@@ -7,16 +7,15 @@ Generates well formed sudokus that have a minimal number of clues. A well formed
 
 usage
 -----
-to run from bash, you must be in the **SudokuGenerator** directory and type
+to run from bash, go to the *SudokuGenerator.jar* file (default in SudokuGenerator/dist) and enter
 
-    java -cp ./build/classes sudoku.Main args
+    java -jar SudokuGenerator.jar [-s p q] -g t|b [-n number] [-o path] [-v]
 
-where the *args* are
+arguments:
 
-    [-s p q] -g t|b [-n number] [-o path] [-v]
     -s  Specifiy the size of the sudoku boards to create.
-        p is the width of the box regions
-        q is the height of the box regions
+        p: width of the box regions
+        q: height of the box regions
         By default, 9x9 boards (p=q=3) boards are created.
         
     -g  Specifiy which type of generator to use.

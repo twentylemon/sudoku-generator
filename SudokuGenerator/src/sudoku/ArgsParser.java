@@ -105,21 +105,20 @@ public class ArgsParser {
      * Displays usage details.
      */
     public void usage(){
-        System.out.println("Usage: java -cp ./build/classes sudoku.Main\n"
-                + "\t[-s p q] -g t|b [-n number] [-o path] [-v]\n"
+        System.out.println("Usage: java -cp ./build/classes sudoku.Main [-s p q] -g t|b [-n number] [-o path] [-v]\n\n"
                 + "\t-s\tSpecifiy the size of the sudoku boards to create.\n"
-                + "\t\tp is the width of the box regions\n"
-                + "\t\tq is the height of the box regions\n"
-                + "\t\tBy default, 9x9 boards (p=q=3) boards are created.\n"
+                + "\t\tp: width of the box regions\n"
+                + "\t\tq: height of the box regions\n"
+                + "\t\tBy default, 9x9 boards (p=q=3) boards are created.\n\n"
                 + "\t-g\tSpecifiy which type of generator to use.\n"
                 + "\t\tt: use a top down generator\n"
-                + "\t\tb: use a bottom up generator\n"
+                + "\t\tb: use a bottom up generator\n\n"
                 + "\t-n\tSpecify the number of sudokus to create.\n"
                 + "\t\tnumber: the number of sudokus to create\n"
-                + "\t\tBy default, 100 sudokus are created.\n"
+                + "\t\tBy default, 100 sudokus are created.\n\n"
                 + "\t-o\tSpecify the location to store the sudokus.\n"
                 + "\t\tpath: the file to store all the sudokus in\n"
-                + "\t\tBy default, \"[system_time].sudoku.txt\" is used.\n"
+                + "\t\tBy default, \"[system_time].sudoku.txt\" is used.\n\n"
                 + "\t-v\tTurn verbose mode on, default off.\n"
         );
     }
