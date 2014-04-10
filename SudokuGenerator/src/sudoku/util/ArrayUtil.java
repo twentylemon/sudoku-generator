@@ -43,4 +43,20 @@ public class ArrayUtil {
         }
     }
 
+    /**
+     * Returns true if the value is in the array given.
+     *
+     * @param <T> the type held in the array
+     * @param array the array to search in
+     * @param value the value to search for
+     * @return true if the value is in the array
+     */
+    public static <T> boolean contains(T[] array, T value){
+        for (T entry : array){
+            if (entry == value || value != null && value.equals(entry)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

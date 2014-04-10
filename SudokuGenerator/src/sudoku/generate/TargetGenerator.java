@@ -1,6 +1,9 @@
-package sudoku;
+package sudoku.generate;
 
 import java.util.Set;
+import sudoku.SolverService;
+import sudoku.SudokuBoard;
+import sudoku.SudokuSolver;
 import sudoku.util.ArrayUtil;
 
 /**

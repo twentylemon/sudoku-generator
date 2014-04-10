@@ -1,4 +1,6 @@
-package sudoku;
+package sudoku.generate;
+
+import sudoku.SudokuBoard;
 
 /**
  * Class that will generate a minimal well formed sudoku.

@@ -1,6 +1,10 @@
 package sudoku;
 
+import sudoku.generate.BottomUpGenerator;
+import sudoku.generate.SudokuGenerator;
+
 /**
+ * Main class for testing stuff.
  *
  * @author Taras Mychaskiw
  */

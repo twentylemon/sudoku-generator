@@ -1,5 +1,8 @@
-package sudoku;
+package sudoku.generate;
 
+import sudoku.SolverService;
+import sudoku.SudokuBoard;
+import sudoku.SudokuSolver;
 import sudoku.clp.CLPBoardGenerator;
 import sudoku.util.ArrayUtil;
 
@@ -65,7 +68,6 @@ public class TopDownGenerator implements SudokuGenerator {
                 board.setCell(cell, solved.getCell(cell));
             }
             pos++;
-            //System.out.println(pos + "\t" + cells.length + "\t" + well);
         }
         return board;
     }

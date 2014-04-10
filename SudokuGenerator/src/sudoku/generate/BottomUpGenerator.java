@@ -1,9 +1,18 @@
-package sudoku;
+package sudoku.generate;
 
 import java.util.List;
 import java.util.Random;
+import sudoku.SolverService;
+import sudoku.SudokuBoard;
+import sudoku.SudokuSolver;
 
 /**
+ * Generates sudoku problems from the bottom up. At each iteration, a cell
+ * with more than one candidate is selected, and assigned a random value. If
+ * the puzzle has no solutions, clear the cell and continue. If there are
+ * multiple solutions, continue. If there is only one solution, break.
+ * After, go through each cell and try clearing the value there. If there is
+ * no longer one solution, replace the value.
  *
  * @author Taras Mychaskiw
  */

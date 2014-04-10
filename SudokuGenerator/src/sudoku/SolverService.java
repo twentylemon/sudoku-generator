@@ -31,12 +31,15 @@ public class SolverService {
     /**
      * list of all the solvers testing if the sudoku is well formed
      */
+    private static final SudokuSolver BACK = new BacktrackSolver();
+    private static final SudokuSolver CLP = new ConstraintSolver();
+    private static final SudokuSolver DLX = new ExactCoverSolver();
     private static final List<Callable<Integer>> CALLABLES = new LinkedList<Callable<Integer>>(){{
         add(new Callable<Integer>(){
             @Override
             public Integer call(){
                 long time = System.currentTimeMillis();
-                Integer result = new BacktrackSolver().getFormity(BOARD);
+                Integer result = BACK.getFormity(BOARD);
                 setWinner(BacktrackSolver.class, System.currentTimeMillis() - time);
                 return result;
             }
@@ -45,7 +48,7 @@ public class SolverService {
             @Override
             public Integer call(){
                 long time = System.currentTimeMillis();
-                Integer result = new ConstraintSolver().getFormity(BOARD);
+                Integer result = CLP.getFormity(BOARD);
                 setWinner(ConstraintSolver.class, System.currentTimeMillis() - time);
                 return result;
             }
@@ -54,7 +57,7 @@ public class SolverService {
             @Override
             public Integer call(){
                 long time = System.currentTimeMillis();
-                Integer result = new ExactCoverSolver().getFormity(BOARD);
+                Integer result = DLX.getFormity(BOARD);
                 setWinner(ExactCoverSolver.class, System.currentTimeMillis() - time);
                 return result;
             }

@@ -1,0 +1,1 @@
+java -cp ./build/classes sudoku.Main "$@"
