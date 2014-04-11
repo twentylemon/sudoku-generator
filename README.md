@@ -9,7 +9,7 @@ usage
 -----
 to run from bash, go to the *SudokuGenerator.jar* file (default in SudokuGenerator/dist) and enter
 
-    java -jar SudokuGenerator.jar [-s p q] -g t|b [-n number] [-o path] [-v]
+    java -jar SudokuGenerator.jar [-s p q] -g t|b|d [-n number] [-o path] [-v]
 
 arguments:
 
@@ -21,6 +21,7 @@ arguments:
     -g  Specifiy which type of generator to use.
         t: use a top down generator
         b: use a bottom up generator
+        d: use a deduction generator
         
     -n  Specify the number of sudokus to create.
         number: the number of sudokus to create

@@ -1,6 +1,6 @@
 package sudoku.generate;
 
-import java.util.Set;
+import sudoku.CandidateSet;
 import sudoku.SolverService;
 import sudoku.SudokuBoard;
 import sudoku.SudokuSolver;
@@ -87,9 +87,9 @@ public class TargetGenerator implements SudokuGenerator {
             while (board.isSet(cells[pos])){
                 pos++;
             }
-            Set<Integer> options = board.getOptions(cells[pos]);
+            CandidateSet options = board.getOptions(cells[pos]);
             if (!options.isEmpty()){
-                int val = options.iterator().next();
+                int val = options.getLowestValue();
                 board.setCell(cells[pos], val);
             }
             else {

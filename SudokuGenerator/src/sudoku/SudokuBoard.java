@@ -194,30 +194,19 @@ public class SudokuBoard {
      *
      * @param x row index
      * @param y column index
-     * @return the list of all possible values that can sit in (x,y)
+     * @return the set of all possible values that can sit in (x,y)
      */
-    public Set<Integer> getOptions(int x, int y){
-        final Set<Integer> options = new HashSet<>();
+    public CandidateSet getOptions(int x, int y){
+        final CandidateSet options = new CandidateSet(getSize());
         for (int value = 1; value <= getSize(); value++){
-            if (isAcceptable(x, y, value)){
-                options.add(value);
+            if (!isAcceptable(x, y, value)){
+                options.remove(value);
             }
         }
         return options;
     }
-    public Set<Integer> getOptions(int cell){ return getOptions(cellToPoint(cell)); }
-    public Set<Integer> getOptions(Point point){ return getOptions(point.x, point.y); }
-    public List<Integer> getOptionsList(int x, int y){
-        final List<Integer> options = new ArrayList<>(getSize());
-        for (int value = 1; value <= getSize(); value++){
-            if (isAcceptable(x, y, value)){
-                options.add(value);
-            }
-        }
-        return options;
-    }
-    public List<Integer> getOptionsList(int cell){ return getOptionsList(cellToPoint(cell)); }
-    public List<Integer> getOptionsList(Point point){ return getOptionsList(point.x, point.y); }
+    public CandidateSet getOptions(int cell){ return getOptions(cellToPoint(cell)); }
+    public CandidateSet getOptions(Point point){ return getOptions(point.x, point.y); }
 
 
     /**
@@ -260,7 +249,7 @@ public class SudokuBoard {
      */
     @Override
     public String toString(){
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder((n + p - 1) * LINE.length());
 
         int cell = 0;
         while (cell < getNumCells()){

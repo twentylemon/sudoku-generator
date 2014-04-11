@@ -1,7 +1,7 @@
 package sudoku.generate;
 
-import java.util.List;
 import java.util.Random;
+import sudoku.CandidateSet;
 import sudoku.SolverService;
 import sudoku.SudokuBoard;
 import sudoku.SudokuSolver;
@@ -53,22 +53,22 @@ public class BottomUpGenerator implements SudokuGenerator {
      */
     @Override
     public SudokuBoard getProblem(){
-        SudokuBoard board = new SudokuBoard(brd);
+        final SudokuBoard board = new SudokuBoard(brd);
         ArrayUtil.shuffle(cells);
         int pos = 0;
 
         while (true){
             int cell;
-            List<Integer> options = null;
+            CandidateSet options = null;
             do {
                 cell = cells[pos];
                 pos = (pos + 1) % cells.length;
                 if (!board.isSet(cell)){
-                    options = board.getOptionsList(cell);
+                    options = board.getOptions(cell);
                 }
-            } while (board.isSet(cell) || options.size() <= 1);
+            } while (board.isSet(cell) || options.cardinality() <= 1);
 
-            int value = options.get(rand.nextInt(options.size()));
+            int value = options.getRandomValue();
             board.setCell(cell, value);
 
             int form = SolverService.getFormity(board);
@@ -81,7 +81,7 @@ public class BottomUpGenerator implements SudokuGenerator {
         }
 
         //try removing additional values
-        for (int cell = 0; cell < board.getNumCells(); cell++){
+        for (int cell : cells){
             if (board.isSet(cell)){
                 int value = board.getCell(cell);
                 board.clearCell(cell);

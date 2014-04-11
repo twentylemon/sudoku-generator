@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import sudoku.CandidateSet;
 import sudoku.SudokuBoard;
 import sudoku.SudokuSolver;
 
@@ -30,7 +31,7 @@ public class BacktrackSolver implements SudokuSolver {
             return solve(board, cell + 1);
         }
 
-        final Set<Integer> options = board.getOptions(cell);
+        final CandidateSet options = board.getOptions(cell);
         for (Integer opt : options){
             board.setCell(cell, opt);
             if (solve(board, cell + 1)){
@@ -89,7 +90,7 @@ public class BacktrackSolver implements SudokuSolver {
             return;
         }
 
-        final Set<Integer> options = board.getOptions(cell);
+        final CandidateSet options = board.getOptions(cell);
         for (Integer opt : options){
             board.setCell(cell, opt);
             fill(board, cell + 1, list);
@@ -134,7 +135,7 @@ public class BacktrackSolver implements SudokuSolver {
             return isWellFormed(board, cell + 1, soln);
         }
 
-        final Set<Integer> options = board.getOptions(cell);
+        final CandidateSet options = board.getOptions(cell);
         for (Integer opt : options){
             board.setCell(cell, opt);
             if (!isWellFormed(board, cell + 1, soln)){

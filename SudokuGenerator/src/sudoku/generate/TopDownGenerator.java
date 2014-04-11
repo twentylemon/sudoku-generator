@@ -52,22 +52,16 @@ public class TopDownGenerator implements SudokuGenerator {
         final SudokuBoard solved = CLPBoardGenerator.getRandomBoard(brd);
         SudokuBoard board = new SudokuBoard(solved);
         ArrayUtil.shuffle(cells);
-        int pos = 0;
 
-        while (pos < cells.length){
-            int cell = cells[pos];
+        for (int cell : cells){
             //remove the cell from the sudoku problem
             board.clearCell(cell);
 
             //is it still well fomred?
             int form = SolverService.getFormity(board);
-            if (form == SudokuSolver.UNIQUE_SOLUTION){
-                //if well formed, just continue removing more numbers
-            }
-            else {
+            if (form != SudokuSolver.UNIQUE_SOLUTION){
                 board.setCell(cell, solved.getCell(cell));
             }
-            pos++;
         }
         return board;
     }

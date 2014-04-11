@@ -1,5 +1,6 @@
 package sudoku.clp;
 
+import sudoku.CandidateSet;
 import java.util.ArrayList;
 import java.util.List;
 import sudoku.SudokuBoard;

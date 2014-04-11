@@ -2,6 +2,7 @@ package sudoku;
 
 import java.awt.Point;
 import sudoku.generate.BottomUpGenerator;
+import sudoku.generate.DeductionGenerator;
 import sudoku.generate.SudokuGenerator;
 import sudoku.generate.TopDownGenerator;
 import sudoku.util.ArrayUtil;
@@ -69,6 +70,8 @@ public class ArgsParser {
                         return new TopDownGenerator(p, q);
                     case "b":
                         return new BottomUpGenerator(p, q);
+                    case "d":
+                        return new DeductionGenerator(p, q);
                 }
             }
         }
@@ -105,14 +108,15 @@ public class ArgsParser {
      * Displays usage details.
      */
     public void usage(){
-        System.out.println("Usage: java -cp ./build/classes sudoku.Main [-s p q] -g t|b [-n number] [-o path] [-v]\n\n"
+        System.out.println("Usage: java -cp ./build/classes sudoku.Main [-s p q] -g t|b|d [-n number] [-o path] [-v]\n\n"
                 + "\t-s\tSpecifiy the size of the sudoku boards to create.\n"
                 + "\t\tp: width of the box regions\n"
                 + "\t\tq: height of the box regions\n"
                 + "\t\tBy default, 9x9 (p=q=3) boards are created.\n\n"
                 + "\t-g\tSpecifiy which type of generator to use.\n"
                 + "\t\tt: use a top down generator\n"
-                + "\t\tb: use a bottom up generator\n\n"
+                + "\t\tb: use a bottom up generator\n"
+                + "\t\td: use a deduction generator\n\n"
                 + "\t-n\tSpecify the number of sudokus to create.\n"
                 + "\t\tnumber: the number of sudokus to create\n"
                 + "\t\tBy default, 100 sudokus are created.\n\n"
