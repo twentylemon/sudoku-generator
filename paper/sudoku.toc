@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {subsection}{\numberline {1.1}Terms}{1}
+\contentsline {subsection}{\numberline {1.2}Sudoku}{1}
+\contentsline {section}{\numberline {2}Sudoku Solving Strategies}{2}
+\contentsline {subsection}{\numberline {2.1}Backtracking}{2}
+\contentsline {subsection}{\numberline {2.2}Constraint Propagation}{3}
+\contentsline {subsection}{\numberline {2.3}Sudoku as an Exact Cover Problem}{4}
+\contentsline {subsubsection}{\numberline {2.3.1}Exact Cover}{4}
+\contentsline {subsubsection}{\numberline {2.3.2}Algorithm X}{4}
+\contentsline {subsubsection}{\numberline {2.3.3}Dancing Links}{4}
+\contentsline {section}{\numberline {3}Sudoku Generation}{4}
+\contentsline {subsection}{\numberline {3.1}Top Down Generation}{4}
+\contentsline {subsection}{\numberline {3.2}Bottom Up Generation}{4}
+\contentsline {subsection}{\numberline {3.3}Deduction Generation}{4}
+\contentsline {section}{\numberline {4}Results}{4}

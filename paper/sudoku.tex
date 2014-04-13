@@ -16,6 +16,10 @@
 \begin{document}
 \maketitle
     \begin{abstract}
+    The purpose of this project was to generate minimal well formed sudoku puzzles. A well formed sudoku puzzle is one that has
+    exactly one solution, and a minimal sudoku is one where you cannot remove any clue without making the puzzle not well formed.
+    Several sudoku generating strategies are employed, as well as several solving strategies as the generation of sudoku puzzles
+    inherently requires solving them and counting the number of solutions to them.
     \end{abstract}
 
     \thispagestyle{empty}
@@ -27,11 +31,13 @@
     \clearpage
     \setcounter{page}{1}
     
-    %\input{controls}
+    \input{introduction}
     
-    %\input{physics}
-
-    %\input{3dengine}
+    \input{solving}
+    
+    \input{generate}
+    
+    \input{results}
     
     \include{biblio}
 

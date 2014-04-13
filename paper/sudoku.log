@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.21)  10 APR 2014 12:44
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.21)  13 APR 2014 19:20
 entering extended mode
 **sudoku
 (D:\projects\git\sudoku-generator\paper\sudoku.tex
@@ -208,28 +208,54 @@ LaTeX Font Info:    ... okay on input line 16.
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(D:\projects\git\sudoku-generator\paper\biblio.tex) [1
+(D:\projects\git\sudoku-generator\paper\introduction.tex
+<sudoku.png, id=10, 316.18124pt x 309.40594pt>
+File: sudoku.png Graphic file (type png)
+ <use sudoku.png>
+Package pdftex.def Info: sudoku.png used on input line 30.
+(pdftex.def)             Requested size: 221.32535pt x 216.58267pt.
+)
+(D:\projects\git\sudoku-generator\paper\solving.tex [1
+
+ <D:/projects/git/sudoku-generator/paper/sudoku.png>] [2] [3])
+(D:\projects\git\sudoku-generator\paper\generate.tex)
+(D:\projects\git\sudoku-generator\paper\results.tex) [4]
+(D:\projects\git\sudoku-generator\paper\biblio.tex
+Underfull \hbox (badness 2753) in paragraph at lines 14--15
+[]\OT1/cmr/m/n/12 Cornell Uni-ver-sity, "The Math Be-hind Su-doku", Re-trieved 
+April 2014 from
+ []
 
 
-]
-(D:\projects\git\sudoku-generator\paper\sudoku.aux
+Underfull \hbox (badness 4595) in paragraph at lines 17--18
+[]\OT1/cmr/m/n/12 Peter Norvig, "Solv-ing Ev-ery Su-doku Puz-zle", Re-trieved A
+pril 2014 from
+ []
+
+) [5
+
+] (D:\projects\git\sudoku-generator\paper\sudoku.aux
 (D:\projects\git\sudoku-generator\paper\biblio.aux)) ) 
 Here is how much of TeX's memory you used:
- 2528 strings out of 493921
- 33537 string characters out of 3147281
- 100729 words of memory out of 3000000
- 5815 multiletter control sequences out of 15000+200000
- 6815 words of font info for 25 fonts, out of 3000000 for 9000
+ 2586 strings out of 493921
+ 34576 string characters out of 3147281
+ 108774 words of memory out of 3000000
+ 5852 multiletter control sequences out of 15000+200000
+ 10842 words of font info for 39 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 33i,6n,20p,234b,201s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,22n,20p,234b,436s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmr17.pfb>
-Output written on sudoku.pdf (2 pages, 53247 bytes).
+public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on sudoku.pdf (6 pages, 140935 bytes).
 PDF statistics:
- 25 PDF objects out of 1000 (max. 8388607)
+ 58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
