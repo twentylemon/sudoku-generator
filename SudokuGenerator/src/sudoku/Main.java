@@ -107,7 +107,7 @@ public class Main {
 
         System.out.println("\nsolver statistics");
         System.out.println("        strategy        |  wins  ");
-        System.out.println("------------------------|--------");
+        System.out.println("------------------------+--------");
         Map<Class,Integer> wins = SolverService.getWinMap();
         for (Class strat : wins.keySet()){
             String name = " " + StringUtil.padRight(strat.getSimpleName(), ' ', 23);

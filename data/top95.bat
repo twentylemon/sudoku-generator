@@ -1,0 +1,1 @@
+powershell "java -cp ../SudokuGenerator/build/classes sudoku.Top95 | tee top95.txt"

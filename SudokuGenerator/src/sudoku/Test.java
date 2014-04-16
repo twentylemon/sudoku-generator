@@ -1,7 +1,6 @@
 package sudoku;
 
-import sudoku.generate.BottomUpGenerator;
-import sudoku.generate.DeductionGenerator;
+import sudoku.generate.SlowGenerator;
 import sudoku.generate.SudokuGenerator;
 
 /**
@@ -52,9 +51,9 @@ public class Test {
         System.out.println(SolverService.getLastTime());
         System.out.println(SolverService.getLastWinner());
 */
-        SudokuGenerator gen = new BottomUpGenerator(3, 3);
+        SudokuGenerator gen = new SlowGenerator(3, 3);
         //gen = new TopDownGenerator(3, 3);
-        gen = new DeductionGenerator(3, 3);
+        //gen = new DeductionGenerator(3, 3);
         long time = System.currentTimeMillis();
         SudokuBoard prob = gen.getProblem();
         time = System.currentTimeMillis() - time;

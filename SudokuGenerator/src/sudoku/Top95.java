@@ -121,13 +121,33 @@ public class Top95 {
      * @param solver the solver to use
      * @return time in ms to solve all the problems
      */
-    public static long run(SudokuSolver solver){
+    public static long solve(SudokuSolver solver){
         long totalTime = 0;
         String name = solver.getClass().getSimpleName();
         for (int i = 0; i < TOP95.size(); i++){
-            System.out.print(name + ": " + (i+1) + " / " + TOP95.size() + "...");
+            System.out.print("solve: " + name + ": " + (i+1) + " / " + TOP95.size() + "...");
             long time = System.currentTimeMillis();
             solver.solve(TOP95.get(i));
+            time = System.currentTimeMillis() - time;
+            totalTime += time;
+            System.out.println(time + "ms");
+        }
+        return totalTime;
+    }
+
+    /**
+     * Times one solver.
+     *
+     * @param solver the solver to use
+     * @return time in ms to get the formity all the problems
+     */
+    public static long formity(SudokuSolver solver){
+        long totalTime = 0;
+        String name = solver.getClass().getSimpleName();
+        for (int i = 0; i < TOP95.size(); i++){
+            System.out.print("form: " + name + ": " + (i+1) + " / " + TOP95.size() + "...");
+            long time = System.currentTimeMillis();
+            solver.getFormity(TOP95.get(i));
             time = System.currentTimeMillis() - time;
             totalTime += time;
             System.out.println(time + "ms");
@@ -140,29 +160,39 @@ public class Top95 {
      * @param args
      */
     public static void main(String[] args){
-        SudokuSolver backtrack = new BacktrackSolver();
-        SudokuSolver clp = new ConstraintSolver();
-        SudokuSolver dlx = new ExactCoverSolver();
+        List<SudokuSolver> solvers = new ArrayList<SudokuSolver>(){{
+            add(new BacktrackSolver());
+            add(new ConstraintSolver());
+            add(new ExactCoverSolver());
+        }};
         SudokuGenerator gen = new DeductionGenerator(3, 3);
 
         //get the jit working
-        System.out.println("warming up the javas");
-        int num = 100;
+        System.out.print("warming up the javas");
+        int num = 10;
         for (int i = 1; i <= num; i++){
-            System.out.println(i + " / " + num);
             gen.getProblem();
+            System.out.print(".");
         }
+        System.out.println("all warmed up\n");
 
-        long ct = run(clp);
-        long dt = run(dlx);
-        long bt = run(backtrack);
-        System.out.println("        strategy        |  time  ");
-        System.out.println("------------------------|--------");
-        System.out.print(" " + StringUtil.padRight(backtrack.getClass().getSimpleName(), ' ', 23));
-        System.out.println("|  " + bt + "ms");
-        System.out.print(" " + StringUtil.padRight(clp.getClass().getSimpleName(), ' ', 23));
-        System.out.println("|  " + ct + "ms");
-        System.out.print(" " + StringUtil.padRight(dlx.getClass().getSimpleName(), ' ', 23));
-        System.out.println("|  " + dt + "ms");
+        List<Long> solveTime = new ArrayList<>();
+        List<Long> formTime = new ArrayList<>();
+        for (SudokuSolver solver : solvers){
+            solveTime.add(solve(solver));
+        }
+        for (SudokuSolver solver : solvers){
+            formTime.add(formity(solver));
+        }
+        System.out.println("        strategy        |      solve             |     formity    ");
+        System.out.println("------------------------+------------------------+------------------------");
+        for (int i = 0; i < solvers.size(); i++){
+            SudokuSolver s = solvers.get(i);
+            System.out.print(" " + StringUtil.padRight(s.getClass().getSimpleName(), ' ', 23));
+            System.out.print(StringUtil.padRight("| " + solveTime.get(i) + "ms", ' ', 13));
+            System.out.print(StringUtil.padRight(" (" + (solveTime.get(i) / TOP95.size()) + "ms)", ' ', 12));
+            System.out.print(StringUtil.padRight("| " + formTime.get(i) + "ms", ' ', 13));
+            System.out.println(StringUtil.padRight(" (" + (formTime.get(i) / TOP95.size()) + "ms)", ' ', 12));
+        }
     }
 }

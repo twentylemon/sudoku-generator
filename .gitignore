@@ -13,8 +13,8 @@ hs_err_pid*
 /SudokuGenerator/build/
 
 # skip the data
-data/
+data/*/*
 
 # allow the distributed jar
 !SudokuGenerator.jar
-!data/collect.bat
+

@@ -4,105 +4,175 @@
 
 \section{Sudoku Solving Strategies}
 
-    Generating sudoku puzzles inherently requires being able to solve them. More specifically, the solver must be able to
-    check the formity of the sudoku puzzle and hopefully do it very quickly. Several solving strategies are used in the generation
-    in hopes that one will outperform the others and speed the generation process. Note that each of the algorithms described below
-    detail how to solve a puzzle, not how to get the formity of it. However, the algorithm to get the formity is only a slight
-    modification. For example, one could increment a counter keeping track of how many solutions there have been so far once
-    a solution is found instead of returning the solution right away.
+Generating sudoku puzzles inherently requires being able to solve them. More specifically, the solver must be able to
+check the formity of the sudoku puzzle and hopefully do it very quickly. Several solving strategies are used in the generation
+in hopes that one will outperform the others and speed the generation process. Note that each of the algorithms described below
+detail how to solve a puzzle, not how to get the formity of it. However, the algorithm to get the formity is only a slight
+modification. For example, one could increment a counter keeping track of how many solutions there have been so far once
+a solution is found instead of returning the solution right away.
 
-    \subsection{Backtracking}
-    Backtracking is the easiest solving strategy to understand. As the name suggests, it uses backtracking to solve the sudoku puzzle.
-    Algorithm~\ref{algo:backtrack} describes the basic idea below. Essentially, the algorithm goes through each cell in the sudoku and
-    tries assigning each possible value in a depth first search. If it finds a solution, the solved sudoku is returned right away. If
-    some candidate selection leads to an impossible to solve sudoku, the cell is cleared of it's value and the backtracking tries again
-    from the previous cell. To solve a sudoku puzzle using the backtracking algorithm, one would call $backtrack(sudoku, 0)$.
-    \begin{center}
-    \begin{pseudocode}[framebox]{backtrack}{sudoku, cell}
-        \COMMENT{check if the sudoku is solved}                         \\
-        \IF cell >= \CALL{getTotalCells}{sudoku} \THEN \RETURN {sudoku} \\
-        \COMMENT{if there is already a value here, go to the next cell} \\
-        \IF \CALL{hasValue}{sudoku, cell} \THEN
-            \CALL{backtrack}{sudoku, cell + 1}                          \\
-        \COMMENT{otherwise, try all candidates in depth first search}   \\
-        \FOREACH cand \in \CALL{getCandidates}{sudoku, cell} \DO \BEGIN
-            sudoku[cell] \GETS cand                                     \\
-            board \GETS \CALL{backtrack}{sudoku, cell + 1}              \\
-            \IF \CALL{isSolved}{board} \THEN \RETURN {board}            \\
-        \END                                                            \\
-        sudoku[cell] \GETS nothing                                      \\
-        \RETURN {sudoku}~\COMMENT{the sudoku is not solved}
-        \label{algo:backtrack}
-    \end{pseudocode}
-    \end{center}
-    %\end{Backtracking}
+\subsection{Backtracking}
+Backtracking is the easiest solving strategy to understand. As the name suggests, it uses backtracking to solve the sudoku puzzle.
+Algorithm~\ref{algo:backtrack} describes the basic idea below. Essentially, the algorithm goes through each cell in the sudoku and
+tries assigning each possible value in a depth first search. If it finds a solution, the solved sudoku is returned right away. If
+some candidate selection leads to an impossible to solve sudoku, the cell is cleared of it's value and the backtracking tries again
+from the previous cell. To solve a sudoku puzzle using the backtracking algorithm, one would call $backtrack(sudoku, 0)$.
+\begin{center}
+\begin{pseudocode}[framebox]{backtrack}{sudoku, cell}
+    \COMMENT{check if the sudoku is solved}                         \\
+    \IF cell >= \CALL{getTotalCells}{sudoku} \THEN \RETURN {sudoku} \\
+    \COMMENT{if there is already a value here, go to the next cell} \\
+    \IF \CALL{hasValue}{sudoku, cell} \THEN
+        \CALL{backtrack}{sudoku, cell + 1}                          \\
+    \COMMENT{otherwise, try all candidates in depth first search}   \\
+    \FOREACH cand \in \CALL{getCandidates}{sudoku, cell} \DO \BEGIN
+        sudoku[cell] \GETS cand                                     \\
+        board \GETS \CALL{backtrack}{sudoku, cell + 1}              \\
+        \IF \CALL{isSolved}{board} \THEN \RETURN {board}            \\
+    \END                                                            \\
+    sudoku[cell] \GETS nothing                                      \\
+    \RETURN {sudoku}~\COMMENT{the sudoku is not solved}
+    \label{algo:backtrack}
+\end{pseudocode}
+\end{center}
+%\end{Backtracking}
+
+\subsection{Constraint Propagation}
+Constraint propagation expands on the basic backtracking algorithm. It's more complex than backtracking, but solves sudoku puzzles
+much faster on average. Constraint propagation tries to solve a sudoku puzzle in the same manner that a human would. Each cell on
+the sudoku grid will contain a list of all the candidates to sit in that cell - similar to backtracking but they are used differently.
+Two rules are employed in this solving method:
+\begin{verse}
+    (1) If a cell only has one possible value, $eliminate$ the value from the cell's peers \\
+    (2) If a unit has only one possible cell for a value, $assign$ the value there
+\end{verse}
+These two rules continue to propagate, for example exercising rule 1 may trigger rule 2, which may trigger rule 1 and so on. Eventually,
+either each cell in the entire puzzle will only have one candidate (in which case the puzzle is solved), or the propagation stops and the
+puzzle is not yet solved. At that point, a version of backtracking will take place. A cell is selected, and one of it's candidate values
+is simply assigned to the cell. If the assumption was incorrect, a backtrack would occur and a different value would be selected for the cell.
+Which cell is selected differs from backtracking in that we choose the most constrained cell. That is, the cell with the fewest number of
+candidates, but more than one candidate, is found and a value is assigned there. This helps to limit potential backtracking. The fewer number
+of possibilities a cell has, the better chance that a random selection will end up being correct. 
+To solve a particular sudoku puzzle, each of the cells that already contain values must be $assigned$, then call $search$.
+Algorithms~\ref{algo:assign} through~\ref{algo:clp} describe the flow of each function.
+\begin{center}
+\begin{pseudocode}[framebox]{assign}{cell, value}
+    \GLOBAL{candidates} \\
+    \FOR cand \in candidates[cell] - \{value\} \DO \CALL{eliminate}{cell, cand}
+    \label{algo:assign}
+\end{pseudocode}
+\begin{pseudocode}[framebox]{eliminate}{cell, value}
+    \GLOBAL{candidates, peers, units}   \\
+    candidates[cell] \GETS candidates[cell] - \{value\}         \\
+    \IF |candidates[cell]| = 1 \THEN \BEGIN
+        v \GETS q \in candidates[cell]                          \\
+        \FOR peer \in peers[cell] \DO \CALL{eliminate}{peer, v} \\
+    \END                                                        \\
     
-    \subsection{Constraint Propagation}
-    Constraint propagation expands on the basic backtracking algorithm. It's more complex than backtracking, but solves sudoku puzzles
-    much faster on average. Constraint propagation tries to solve a sudoku puzzle in the same manner that a human would. Each cell on
-    the sudoku grid will contain a list of all the candidates to sit in that cell - similar to backtracking but they are used differently.
-    Two rules are employed in this solving method:
-    \begin{verse}
-        (1) If a cell only has one possible value, $eliminate$ the value from the cell's peers \\
-        (2) If a unit has only one possible cell for a value, $assign$ the value there
-    \end{verse}
-    These two rules continue to propagate, for example exercising rule 1 may trigger rule 2, which may trigger rule 1 and so on. Eventually,
-    either each cell in the entire puzzle will only have one candidate (in which case the puzzle is solved), or the propagation stops and the
-    puzzle is not yet solved. At that point, a version of backtracking will take place. A cell is selected, and one of it's candidate values
-    is simply assigned to the cell. If the assumption was incorrect, a backtrack would occur and a different value would be selected for the cell.
-    Which cell is selected differs from backtracking in that we choose the most constrained cell. That is, the cell with the fewest number of
-    candidates, but more than one candidate, is found and a value is assigned there. This helps to limit potential backtracking. The fewer number
-    of possibilities a cell has, the better chance that a random selection will end up being correct. 
-    To solve a particular sudoku puzzle, each of the cells that already contain values must be $assigned$, then call $search$.
-    Algorithms~\ref{algo:assign} through~\ref{algo:clp} describe the flow of each function.
-    \begin{center}
-    \begin{pseudocode}[framebox]{assign}{cell, value}
-        \GLOBAL{candidates} \\
-        \FOR cand \in candidates[cell] - \{value\} \DO \CALL{eliminate}{cell, cand}
-        \label{algo:assign}
-    \end{pseudocode}
-    \begin{pseudocode}[framebox]{eliminate}{cell, value}
-        \GLOBAL{candidates} \\
-        candidates[cell] \GETS candidates[cell] - \{value\}         \\
-        \IF |candidates[cell]| = 1 \THEN \BEGIN
-            v \GETS q \in candidates[cell]                          \\
-            \FOR peer \in peers[cell] \DO \CALL{eliminate}{peer, v} \\
-        \END                                                        \\
-        
-        \FOR unit \in units[cell] \DO \BEGIN
-            otherCells \GETS \{ s | s \in unit, value \in candidates[s] \}  \\
-            \IF |otherCells| = 1 \THEN \BEGIN
-                c \GETS q \in otherCells                                    \\
-                \CALL{assign}{c, value}
-            \END
+    \FOR unit \in units[cell] \DO \BEGIN
+        otherCells \GETS \{~s~|~s \in unit, value \in candidates[s]~\}  \\
+        \IF |otherCells| = 1 \THEN \BEGIN
+            c \GETS q \in otherCells                                    \\
+            \CALL{assign}{c, value}
         \END
-        \label{algo:eliminate}
-    \end{pseudocode}
-    \begin{pseudocode}[framebox]{search}{\emptyset}
-        \GLOBAL{candidates} \\
-        \IF \exists~set = \emptyset~\forall set \in candidates \THEN \RETURN \FALSE     \\
-        \IF |set| = 1, \forall set \in candidates \THEN \RETURN \TRUE                   \\
-        cell \GETS c \text{ such that } |candidates[c]| > 1 \AND \text{is minimal}      \\
-        \FOR cand \in candidates[cell] \DO \BEGIN
-            \CALL{assign}{cell, cand}                   \\
-            \IF \CALL{search}{} \THEN \RETURN {solved}
-            \ELSE \CALL{revertAssign}{cell, cand}       \\
-        \END                                            \\
-        \RETURN \FALSE
-        \label{algo:clp}
-    \end{pseudocode}
-    \end{center}
-    %\end{Constraint Propagation}
+    \END
+    \label{algo:eliminate}
+\end{pseudocode}
+\begin{pseudocode}[framebox]{search}{ }
+    \GLOBAL{candidates} \\
+    \IF \exists~set = \emptyset~\forall set \in candidates \THEN \RETURN \FALSE     \\
+    \IF |set| = 1, \forall set \in candidates \THEN \RETURN \TRUE                   \\
+    cell \GETS c \text{ such that } |candidates[c]| > 1 \AND \text{is minimal}      \\
+    \FOR cand \in candidates[cell] \DO \BEGIN
+        \CALL{assign}{cell, cand}                   \\
+        \IF \CALL{search}{} \THEN \RETURN {solved}
+        \ELSE \CALL{revertAssign}{cell, cand}       \\
+    \END                                            \\
+    \RETURN \FALSE
+    \label{algo:clp}
+\end{pseudocode}
+\end{center}
+%\end{Constraint Propagation}
+
+\subsection{Sudoku as an Exact Cover Problem}
+    \subsubsection{Exact Cover}
+    Before getting into how to solve sudoku puzzles by treating them as instances of the exact cover problem, we must know
+    what the exact cover problem is. The exact cover problem is:
+    \begin{verse}
+        given a collection $S$ of subsets of a set $X$, an \textit{exact cover} is a subcollection $S^*$ of $S$ such that each element
+        in $X$ is contained in exactly one subset in $S^*$
+    \end{verse}
+    The exact cover problem is NP-Complete, proved by Karp in 1972\cite{npc}. One way to represent an exact cover problem is to use
+    a matrix filled with boolean values. Each column of the matrix represent one element in $X$, and each row represents one of the
+    subsets in $S$. Each of the boolean values in the matrix tell us if an element exists in the subset for that row. An example is
+    detailed in the table below. Here, $X$ = $\{1,2,3,4,5,6\}$, and $S^*$ = $\{A,D,E\}$.
+    \begin{center}\begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+            &   1   &   2   &   3   &   4   &   5   &   6   \\  \hline
+        $A$ &   0   &   1   &   0   &   0   &   0   &   0   \\  \hline
+        $B$ &   0   &   0   &   1   &   1   &   1   &   0   \\  \hline
+        $C$ &   0   &   1   &   0   &   0   &   0   &   0   \\  \hline
+        $D$ &   0   &   0   &   1   &   0   &   1   &   1   \\  \hline
+        $E$ &   1   &   0   &   0   &   1   &   0   &   0   \\
+        \hline
+    \end{tabular}\end{center}
+    %\end{Exact Cover}
     
-    \subsection{Sudoku as an Exact Cover Problem}
-        \subsubsection{Exact Cover}
-        %\end{Exact Cover}
-        
-        \subsubsection{Algorithm X}
-        %\end{Algorithm X}
-        
-        \subsubsection{Dancing Links}
-        %\end{Dancing Links}
-    %\end{Sudoku as an Exact Cover Problem}
+    \subsubsection{Algorithm X and Dancing Links}
+    Donald Knuth introduced Algorithm X alongside Dancing Links in his 2000 paper\cite{dlx}. Algorithm X is defined as a non-deterministic
+    backtracking algorithm that solves the exact cover problem when the problem is in the matrix form described above. The goal is to select
+    a subset of rows of that matrix $A$ so that the true value appears only one in each column. Algorithm~\ref{algo:x} describes Algorithm X.
+    \begin{center}\begin{pseudocode}[framebox]{algorithmX}{A}
+        \IF A = \emptyset \THEN \RETURN \TRUE                           \\
+        col \GETS \text{a column of }A                                  \\
+        row \GETS \text{a row of }A\text{ such that }A[row][col] = 1    \\
+        \text{include }row\text{ in the partial solution}               \\
+        \FOR j \in \{~v~|~A[row][v] = 1~\} \DO \BEGIN
+            \FOR i \in \{~w~|~A[w][j] = 1~\} \DO
+                \text{remove row }i\text{from }A                        \\
+            \text{remove column }j\text{from }A                         \\
+        \END                                                            \\
+        \text{repeat using the reduced matrix }A
+        \label{algo:x}
+    \end{pseudocode}\end{center}
+    Dancing Links is an implementation of Algorithm X. At first glance of Algorithm X, it seems that much time would be wasted searching
+    for $1$'s in the matrix $A$. Dancing Links provides a clever way to eliminate that search while also providing a very easy means for
+    backtracking to occur. Dancing Links uses a quadruply linked list to represent the matrix, where each node in the list only contains
+    the $1$'s in the matrix and are connected to the next $1$ in the matrix in direction. Additionally, there is a column header for each
+    column, which each node in the column points to as well. Figure~\ref{fig:dlx} shows an example of the gigantic list that makes up Dancing Links.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.70]{dlx.png}
+        \caption{An example matrix representation using Dancing Links.}
+        \label{fig:dlx}
+    \end{figure}
+    The list removes the task of searching for $1$'s in the matrix, but as mentioned it's also very simple to remove columns from and
+    re-add columns for backtracking. To remove a node from a column, for example, it requires:
+    \begin{eqnarray}
+        Node.left.right &=& Node.right  \nonumber   \\  
+        Node.right.left &=& Node.left   \nonumber
+    \end{eqnarray}
+    And reinserting the node into the row requires:
+    \begin{eqnarray}
+        Node.left.right &=& Node    \nonumber   \\  
+        Node.right.left &=& Node    \nonumber
+    \end{eqnarray}
+    Using Dancing Links as the implementation for Algorithm X, solving the exact cover problem becomes very fast.
+    %\end{Algorithm X and Dancing Links}
+    
+    \subsubsection{Solving Sudoku as an Exact Cover Problem}
+    Sudoku can be represented by an exact cover problem. Using the rules of sudoku, we can come up with the set $X$ and the collection
+    of subsets $S$. If we think of each rule in sudoku as a column in the matrix $A$, then we can start to see how sudoku can be transformed
+    into exact cover. Each of the rules must be satisfied exactly once, then the board is solved. If we get an exact cover of the matrix where
+    each of the column is a sudoku rule, then we solve that sudoku. The rules state that the values $1$ though $n$ must appear exact once in each
+    row, column and box in the sudoku. Another implicit rule, but a very important one, is that each cell can only contain one value. This sums up
+    to $4n^2$ total constraints that must be satisfied. Each of the $n$ rows, columns and boxes must contain $n$ values ($3n^2$), and each cell must
+    contain a value which adds the final $n^2$. Each of these makes up a single element in $X$ - a single column of the matrix $A$.\\
+    The collection of subsets in $n^3$ in size. For each cell, any value can sit in it. We can represent these by row, column and value triples,
+    such as (row 1, column 1, value 1), (row 1, column 1, value 1) ... (row n, column n, value n). Each triple satisfies four constraints,
+    the row-value, column-value and box-values pairs, and that the cell is occupied. Using this information we can construct the matrix $A$
+    then use Dancing Links to solve the puzzle.
+    %\end{Solving Sudoku as an Exact Cover Problem}
+%\end{Sudoku as an Exact Cover Problem}
 
 %\end{Sudoku Solvung Strategies}
