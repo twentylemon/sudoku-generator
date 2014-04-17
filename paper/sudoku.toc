@@ -6,14 +6,16 @@
 \contentsline {subsection}{\numberline {2.2}Constraint Propagation}{3}
 \contentsline {subsection}{\numberline {2.3}Sudoku as an Exact Cover Problem}{4}
 \contentsline {subsubsection}{\numberline {2.3.1}Exact Cover}{4}
-\contentsline {subsubsection}{\numberline {2.3.2}Algorithm X and Dancing Links}{4}
+\contentsline {subsubsection}{\numberline {2.3.2}Algorithm X and Dancing Links}{5}
 \contentsline {subsubsection}{\numberline {2.3.3}Solving Sudoku as an Exact Cover Problem}{6}
-\contentsline {section}{\numberline {3}Sudoku Generation}{6}
+\contentsline {section}{\numberline {3}Sudoku Generation}{7}
 \contentsline {subsection}{\numberline {3.1}Top Down Generation}{7}
 \contentsline {subsection}{\numberline {3.2}Bottom Up Generation}{7}
 \contentsline {subsection}{\numberline {3.3}Deduction Generation}{8}
-\contentsline {section}{\numberline {4}Results}{8}
+\contentsline {section}{\numberline {4}Results}{9}
 \contentsline {subsection}{\numberline {4.1}Comparison of Solving Strategies}{9}
 \contentsline {subsubsection}{\numberline {4.1.1}Solving Hard Puzzles}{9}
 \contentsline {subsubsection}{\numberline {4.1.2}Use in Generation}{9}
 \contentsline {subsection}{\numberline {4.2}Comparison of Generation Strategies}{11}
+\contentsline {section}{\numberline {5}Future Work}{12}
+\contentsline {section}{\numberline {6}Conclusions}{13}

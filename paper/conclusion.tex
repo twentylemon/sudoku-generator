@@ -1,0 +1,32 @@
+% COSC 4P03 Project
+% sudoku generator
+% Taras Mychaskiw
+
+\section{Future Work}
+
+An obvious extension of the work would be to devise more sudoku generation strategies, in order to produce sudoku puzzles with
+fewer clues or produce very hard puzzles. Some additional ideas for generators that were never tested (due to time constraints)
+are described below.
+
+\begin{enumerate}
+    \item starting from an empty sudoku, select the next clue to place in such a way that it limits the total amount of
+    information given to the player, perhaps by maximizing the size of all the candidate sets for each remaining cell
+
+    \item devise some difficulty ratings, and optimize them in the construction of the sudoku puzzle, perhaps a dynamic programming
+    algorithm would be possible here to ensure the hardest puzzle in generated
+\end{enumerate}
+
+Solving sudoku puzzles does not need additional improvements (in \textit{my} opinion, at least). They are plenty fast, and when run
+concurrently, one only reaps the benefits of each solver - the weaknesses of one solver are offset by the strengths of another.
+However, if a faster sudoku solver is devised, it can only help the generation of puzzles.
+
+%\end{Future Work}
+
+\clearpage
+\section{Conclusions}
+All in all, the bottom up generation strategy was the most successful sudoku puzzle generator tested. It will occasionally produce an
+effectively useless puzzle, but more often than not it outperforms the other generators in terms of the number of clues in the puzzles
+created. It may take slightly more time, but it still created about $20$ sudoku puzzles per second on the computer running the tests.
+In the future, one can remove the constraint propagation strategy entirely, and only run backtracking and exact cover solvers while
+generating puzzles. This will ensure the unexpected benefits of backtracking and the raw speed of exact cover are both exploited.
+%\end{Conclusions}

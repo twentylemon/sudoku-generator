@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.21)  16 APR 2014 12:28
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.21)  17 APR 2014 13:03
 entering extended mode
 **sudoku
 (D:\projects\git\sudoku-generator\paper\sudoku.tex
@@ -120,25 +120,7 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrextend.sty"
-Package: scrextend 2012/07/29 v3.11b KOMA-Script KOMA-Script package (extend ot
-her classes with features of KOMA-Script classes)
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrkbase.sty"
-Package: scrkbase 2012/07/29 v3.11b KOMA-Script package (KOMA-Script-dependent 
-basics and keyval usage)
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrbase.sty"
-Package: scrbase 2012/07/29 v3.11b KOMA-Script package (KOMA-Script-independent
- basics and keyval usage)
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrlfile.sty"
-Package: scrlfile 2012/06/15 v3.12 KOMA-Script package (loading files)
-
-Package scrlfile, 2012/06/15 v3.12 KOMA-Script package (loading files)
-                  Copyright (C) Markus Kohm
-
-)))) ("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count100
 \float@exts=\toks20
@@ -175,20 +157,19 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \c@pseudocode=\count101
 \c@pseudonum=\count102
 )
-(D:\projects\git\sudoku-generator\paper\sudoku.aux
-(D:\projects\git\sudoku-generator\paper\biblio.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+(D:\projects\git\sudoku-generator\paper\sudoku.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -212,32 +193,33 @@ LaTeX Font Info:    ... okay on input line 16.
 <sudoku.png, id=10, 316.18124pt x 309.40594pt>
 File: sudoku.png Graphic file (type png)
  <use sudoku.png>
-Package pdftex.def Info: sudoku.png used on input line 30.
-(pdftex.def)             Requested size: 221.32535pt x 216.58267pt.
-)
-(D:\projects\git\sudoku-generator\paper\solving.tex [1
+Package pdftex.def Info: sudoku.png used on input line 35.
+(pdftex.def)             Requested size: 211.84033pt x 207.3009pt.
+ [1
 
- <D:/projects/git/sudoku-generator/paper/sudoku.png>] [2] [3] [4]
+ <D:/projects/git/sudoku-generator/paper/sudoku.png>])
+(D:\projects\git\sudoku-generator\paper\solving.tex [2] [3] [4]
 <dlx.png, id=29, 301.8778pt x 284.56313pt>
 File: dlx.png Graphic file (type png)
  <use dlx.png>
-Package pdftex.def Info: dlx.png used on input line 145.
+Package pdftex.def Info: dlx.png used on input line 146.
 (pdftex.def)             Requested size: 211.31302pt x 199.19283pt.
- [5 <D:/projects/git/sudoku-generator/paper/dlx.png>])
-(D:\projects\git\sudoku-generator\paper\generate.tex [6] [7])
-(D:\projects\git\sudoku-generator\paper\results.tex [8]
+ [5] [6 <D:/projects/git/sudoku-generator/paper/dlx.png>])
+(D:\projects\git\sudoku-generator\paper\generate.tex [7] [8])
+(D:\projects\git\sudoku-generator\paper\results.tex
 <solvers.png, id=44, 602.25pt x 372.39125pt>
 File: solvers.png Graphic file (type png)
  <use solvers.png>
-Package pdftex.def Info: solvers.png used on input line 45.
+Package pdftex.def Info: solvers.png used on input line 51.
 (pdftex.def)             Requested size: 421.57211pt x 260.67209pt.
  [9] [10 <D:/projects/git/sudoku-generator/paper/solvers.png>]
 <generators.png, id=53, 602.25pt x 372.39125pt>
 File: generators.png Graphic file (type png)
  <use generators.png>
-Package pdftex.def Info: generators.png used on input line 75.
+Package pdftex.def Info: generators.png used on input line 83.
 (pdftex.def)             Requested size: 421.57211pt x 260.67209pt.
-) [11 <D:/projects/git/sudoku-generator/paper/generators.png>]
+ [11 <D:/projects/git/sudoku-generator/paper/generators.png>])
+(D:\projects\git\sudoku-generator\paper\conclusion.tex [12])
 (D:\projects\git\sudoku-generator\paper\biblio.tex
 Underfull \hbox (badness 2753) in paragraph at lines 14--15
 []\OT1/cmr/m/n/12 Cornell Uni-ver-sity, "The Math Be-hind Su-doku", Re-trieved 
@@ -250,33 +232,32 @@ Underfull \hbox (badness 4595) in paragraph at lines 17--18
 pril 2014 from
  []
 
-) [12
+) [13
 
-] (D:\projects\git\sudoku-generator\paper\sudoku.aux
-(D:\projects\git\sudoku-generator\paper\biblio.aux)) ) 
+] (D:\projects\git\sudoku-generator\paper\sudoku.aux) ) 
 Here is how much of TeX's memory you used:
- 2615 strings out of 493921
- 34952 string characters out of 3147281
- 108856 words of memory out of 3000000
- 5877 multiletter control sequences out of 15000+200000
+ 2178 strings out of 493921
+ 27431 string characters out of 3147281
+ 90000 words of memory out of 3000000
+ 5454 multiletter control sequences out of 15000+200000
  11189 words of font info for 40 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 33i,22n,20p,234b,436s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmti12.pfb>
-Output written on sudoku.pdf (13 pages, 229137 bytes).
+ 27i,22n,20p,324b,434s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmti12.pfb>
+Output written on sudoku.pdf (14 pages, 235494 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
+ 103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

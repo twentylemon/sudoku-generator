@@ -42,10 +42,10 @@ Constraint propagation expands on the basic backtracking algorithm. It's more co
 much faster on average. Constraint propagation tries to solve a sudoku puzzle in the same manner that a human would. Each cell on
 the sudoku grid will contain a list of all the candidates to sit in that cell - similar to backtracking but they are used differently.
 Two rules are employed in this solving method:
-\begin{verse}
-    (1) If a cell only has one possible value, $eliminate$ the value from the cell's peers \\
-    (2) If a unit has only one possible cell for a value, $assign$ the value there
-\end{verse}
+\begin{enumerate}
+    \item if a cell only has one possible value, $eliminate$ the value from the cell's peers
+    \item if a unit has only one possible cell for a value, $assign$ the value there
+\end{enumerate}
 These two rules continue to propagate, for example exercising rule 1 may trigger rule 2, which may trigger rule 1 and so on. Eventually,
 either each cell in the entire puzzle will only have one candidate (in which case the puzzle is solved), or the propagation stops and the
 puzzle is not yet solved. At that point, a version of backtracking will take place. A cell is selected, and one of it's candidate values
@@ -53,7 +53,8 @@ is simply assigned to the cell. If the assumption was incorrect, a backtrack wou
 Which cell is selected differs from backtracking in that we choose the most constrained cell. That is, the cell with the fewest number of
 candidates, but more than one candidate, is found and a value is assigned there. This helps to limit potential backtracking. The fewer number
 of possibilities a cell has, the better chance that a random selection will end up being correct. 
-To solve a particular sudoku puzzle, each of the cells that already contain values must be $assigned$, then call $search$.
+To solve a particular sudoku puzzle, each of the cells that already contain values must be $assigned$, then call $search$. This implicitly means
+that there is some pre-processing of a sudoku puzzle before solving the puzzle actually starts.
 Algorithms~\ref{algo:assign} through~\ref{algo:clp} describe the flow of each function.
 \begin{center}
 \begin{pseudocode}[framebox]{assign}{cell, value}
@@ -97,7 +98,7 @@ Algorithms~\ref{algo:assign} through~\ref{algo:clp} describe the flow of each fu
 \subsection{Sudoku as an Exact Cover Problem}
     \subsubsection{Exact Cover}
     Before getting into how to solve sudoku puzzles by treating them as instances of the exact cover problem, we must know
-    what the exact cover problem is. The exact cover problem is:
+    what the exact cover problem is. The exact cover problem is defined as:
     \begin{verse}
         given a collection $S$ of subsets of a set $X$, an \textit{exact cover} is a subcollection $S^*$ of $S$ such that each element
         in $X$ is contained in exactly one subset in $S^*$
@@ -163,15 +164,17 @@ Algorithms~\ref{algo:assign} through~\ref{algo:clp} describe the flow of each fu
     \subsubsection{Solving Sudoku as an Exact Cover Problem}
     Sudoku can be represented by an exact cover problem. Using the rules of sudoku, we can come up with the set $X$ and the collection
     of subsets $S$. If we think of each rule in sudoku as a column in the matrix $A$, then we can start to see how sudoku can be transformed
-    into exact cover. Each of the rules must be satisfied exactly once, then the board is solved. If we get an exact cover of the matrix where
+    into exact cover. Each of the rules must be satisfied exactly once, then the puzzle is solved. If we get an exact cover of the matrix where
     each of the column is a sudoku rule, then we solve that sudoku. The rules state that the values $1$ though $n$ must appear exact once in each
     row, column and box in the sudoku. Another implicit rule, but a very important one, is that each cell can only contain one value. This sums up
     to $4n^2$ total constraints that must be satisfied. Each of the $n$ rows, columns and boxes must contain $n$ values ($3n^2$), and each cell must
     contain a value which adds the final $n^2$. Each of these makes up a single element in $X$ - a single column of the matrix $A$.\\
     The collection of subsets in $n^3$ in size. For each cell, any value can sit in it. We can represent these by row, column and value triples,
-    such as (row 1, column 1, value 1), (row 1, column 1, value 1) ... (row n, column n, value n). Each triple satisfies four constraints,
-    the row-value, column-value and box-values pairs, and that the cell is occupied. Using this information we can construct the matrix $A$
-    then use Dancing Links to solve the puzzle.
+    such as (row $1$, column $1$, value $1$), (row $1$, column $1$, value $2$) ... (row $n$, column $n$, value $n$). Each triple satisfies four
+    constraints, the row-value, column-value and box-values pairs, and that the cell is occupied. If a cell contains a clue, then only one tuple
+    appears in the matrix for that cell. Using this information we can construct the matrix $A$ then use Dancing Links to solve the puzzle.\\
+    It should be noted that to use exact cover to solve sudoku, some pre-processing is required to create the matrix $A$. Afterwards, some
+    post-processing is required to transform the matrix back into a sudoku puzzle.
     %\end{Solving Sudoku as an Exact Cover Problem}
 %\end{Sudoku as an Exact Cover Problem}
 

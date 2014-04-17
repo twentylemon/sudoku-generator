@@ -9,12 +9,12 @@ sudoku puzzle with a unique solution, where if you were to remove any clue, the 
 Each of the generator algorithms are fairly simple.
 
 \subsection{Top Down Generation}
-In top down generation, we start with a randomly solved sudoku board and randomly remove clues from it. With each clue removed,
+In top down generation, we start with a randomly solved sudoku puzzle and randomly remove clues from it. With each clue removed,
 the puzzle so far is checked to ensure it still has exactly one solution. If it has more than one solution, then the value in the
 cell is replaced. This process is done for each cell in the sudoku.
 \begin{center}
 \begin{pseudocode}[framebox]{topDown}{ }
-    sudoku \GETS \text{a solved sudoku board}       \\
+    sudoku \GETS \text{a solved sudoku puzzle}      \\
     \FOR cell \in sudoku \DO \BEGIN
         \text{remove the cell from sudoku}          \\
         form \GETS \text{formity of sudoku}         \\
@@ -28,20 +28,20 @@ cell is replaced. This process is done for each cell in the sudoku.
 %\end{Top Down Generation}
 
 \subsection{Bottom Up Generation}
-Bottom up generation is the exact opposite of top down generation. Starting with an empty board, randomly add clues
+Bottom up generation is the exact opposite of top down generation. Starting with an empty sudoku, randomly add clues
 to random cells. Only those clues which are possible to sit in the cell are considered. Once a value is added, the formity
 of the sudoku is checked. If there are no solutions, the value added is removed, and the process is continued. If there are
 multiple solutions, the process is continued. The process stops once a sudoku with a unique solution is found. However this
 produces puzzles with approximately $30$ clues in a $9$x$9$ sudoku, so some post-processing is required. For each clue in the
-sudoku, try removing it. If the puzzle still no longer has a unique solution, then replace the value.
+sudoku, try removing it. If the puzzle no longer has a unique solution, then replace the value.
 \begin{center}
 \begin{pseudocode}[framebox]{bottomUp}{ }
-    sudoku \GETS \text{an empty sudoku board}                               \\
+    sudoku \GETS \text{an empty sudoku puzzle}                              \\
     \WHILE \TRUE \DO \BEGIN
         cell \GETS \text{a random empty cell} \in sudoku                    \\
         sudoku[cell] \GETS \text{a random possible value}                   \\
         form \GETS \text{formity of sudoku}                                 \\
-        \IF form = \text{unique solution} \THEN \EXIT \text{while}          \\
+        \IF form = \text{unique solution} \THEN \EXIT \WHILE         \\
         \IF form = \text{no solution} \THEN \text{clear the cell placed}    \\
     \END    \\
     \FOR clue \in sudoku \DO \BEGIN
@@ -56,14 +56,14 @@ sudoku, try removing it. If the puzzle still no longer has a unique solution, th
 %\end{Bottom Up Generation}
 
 \subsection{Deduction Generation}
-Deduction generation was an attempt to produce sudoku puzzles with few clues. Starting with a solved sudoku puzzle, only add
-a clue to our returned puzzle if it is not deduced by all the other clues in our return puzzle already. That is, if a cell has
-more than $1$ possible value, add the value from the solution to the cell. This also creates a $30$-$40$ clue puzzle, so the same
-post-processing as bottom up generation is required.
+Deduction generation was an attempt to produce sudoku puzzles with few clues. Starting with a solved sudoku puzzle and an empty one,
+only copy a clue from the solver puzzle to the empty puzzle if it is not deduced by all the other clues in our the empty puzzle already.
+That is, if a cell has more than $1$ possible value, add the value from the solution to the cell. This also creates a $30$-$40$ clue puzzle,
+so the same post-processing as bottom up generation is required.
 \begin{center}
 \begin{pseudocode}[framebox]{deduction}{ }
-    solved \GETS \text{a solved sudoku board}       \\
-    sudoku \GETS \text{an empty sudoku board}       \\
+    solved \GETS \text{a solved sudoku puzzle}      \\
+    sudoku \GETS \text{an empty sudoku puzzle}      \\
     \FOR cell \in sudoku \DO
         \IF |\CALL{getOptions}{sudoku, cell}| > 1 \THEN
             sudoku[cell] \GETS solved[cell]         \\
